@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Patient>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="display-5">Patients List</h1>
+
+<div class="d-flex justify-content-end">
+    <a asp-action="Create" asp-controller="Patients" class="btn btn-outline-primary">Entry New Patient</a>
+</div>
+@foreach (var item in Model)
+{
+    <div class="card mt-2">
+        <div class="card-header d-flex justify-content-evenly">
+            <div>
+                <img src="@item.Image" width="40" />
+                <b> Patient Name : </b>@Html.DisplayFor(x => item.PatientName)
+                <b> Date Of Birth : </b>@Html.DisplayFor(x => item.DateOfBirth)
+                <b> Phone : </b>@Html.DisplayFor(x => item.Phone)
+                <b> Admission : </b>@Html.DisplayFor(x => item.Admission)
+            </div>
+            <div>
+                <a asp-action="Edit" class="btn btn-outline-success btn-sm" asp-route-id="@item.PatientId">Edit</a>
+                <a asp-action="Delete" class="btn btn-outline-danger btn-sm" asp-route-id="@item.PatientId">Delete</a>
+
+            </div>
+        </div>
+        <div class="card-body">
+            <h2 class="text-center">Test List</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in item.PatientTestInfos)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(x => t.Test.TestName)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>     
+    </div>
+}
